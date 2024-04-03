@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
     {
         if (Input.GetKeyDown(keyCode))
         {
-            Instantiate<GameObject>(Item, this.transform);
+            Instantiate<GameObject>(Item, transform.position, transform.rotation);
         }
     }
 }
