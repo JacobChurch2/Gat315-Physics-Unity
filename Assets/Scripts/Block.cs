@@ -8,6 +8,7 @@ public class Block : MonoBehaviour
 {
 	[SerializeField] int points = 100;
 	[SerializeField] AudioSource audioSource;
+	[SerializeField] PointManager pointManager;
 
 	Rigidbody rb;
 	bool destoyed = false;
@@ -31,6 +32,7 @@ public class Block : MonoBehaviour
 			rb.velocity.magnitude == 0 &&
 			rb.angularVelocity.magnitude == 0)
 		{
+			pointManager.addPoints(points);
 			destoyed = true;
 			Destroy(gameObject, 2);
 		}
