@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -31,7 +32,6 @@ public class Block : MonoBehaviour
 			rb.angularVelocity.magnitude == 0)
 		{
 			destoyed = true;
-			print(points);
 			Destroy(gameObject, 2);
 		}
 	}
