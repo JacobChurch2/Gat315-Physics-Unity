@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -10,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
 	[SerializeField, Range(1, 10)] float pushPower = 2.0f;
 	[SerializeField, Range(1, 10)] float rotationRate = 3;
 	[SerializeField] Transform view;
+	[SerializeField] Animator animator;
 
 	private CharacterController controller;
 	private Vector3 velocity;
@@ -23,6 +25,7 @@ public class CharacterMovement : MonoBehaviour
 	void Update()
 	{
 		onGround = controller.isGrounded;
+		animator.SetBool("OnGround", onGround);
 		if (onGround && velocity.y < 0)
 		{
 			velocity.y = 0f;
@@ -34,6 +37,7 @@ public class CharacterMovement : MonoBehaviour
 		move = Quaternion.Euler(0, view.rotation.eulerAngles.y, 0) * move;
 
 		controller.Move(move * Time.deltaTime * speed);
+		animator.SetFloat("Speed", move.magnitude);
 
 		if (move != Vector3.zero)
 		{
@@ -47,6 +51,7 @@ public class CharacterMovement : MonoBehaviour
 			velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * Physics.gravity.y);
 		}
 
+		animator.SetFloat("YVelocity", velocity.y);
 		velocity.y += Physics.gravity.y * Time.deltaTime;
 		controller.Move(velocity * Time.deltaTime);
 	}
