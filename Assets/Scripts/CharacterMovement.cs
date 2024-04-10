@@ -25,7 +25,6 @@ public class CharacterMovement : MonoBehaviour
 	void Update()
 	{
 		onGround = controller.isGrounded;
-		animator.SetBool("OnGround", onGround);
 		if (onGround && velocity.y < 0)
 		{
 			velocity.y = 0f;
@@ -37,7 +36,6 @@ public class CharacterMovement : MonoBehaviour
 		move = Quaternion.Euler(0, view.rotation.eulerAngles.y, 0) * move;
 
 		controller.Move(move * Time.deltaTime * speed);
-		animator.SetFloat("Speed", move.magnitude);
 
 		if (move != Vector3.zero)
 		{
@@ -51,9 +49,18 @@ public class CharacterMovement : MonoBehaviour
 			velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * Physics.gravity.y);
 		}
 
-		animator.SetFloat("YVelocity", velocity.y);
 		velocity.y += Physics.gravity.y * Time.deltaTime;
 		controller.Move(velocity * Time.deltaTime);
+
+		if(Input.GetKeyDown(KeyCode.E))
+		{
+			animator.SetBool("Equipped", !animator.GetBool("Equipped"));
+		}
+
+		//animations
+		animator.SetFloat("Speed", move.magnitude * speed);
+		animator.SetFloat("YVelocity", velocity.y);
+		animator.SetBool("OnGround", onGround);
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit)
