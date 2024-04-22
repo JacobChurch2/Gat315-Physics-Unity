@@ -12,13 +12,13 @@ TagManager:
   - Kill
   - Water
   - UI
+  - World
+  - Player
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - isGround
+  - isWall
+  - isLedge
   - 
   - 
   - 
